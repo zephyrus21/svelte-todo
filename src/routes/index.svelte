@@ -1,5 +1,5 @@
 <script>
-  import TodoItem from "../lib/todo-item.svelte";
+  import TodoItem from "../components/todo-item.svelte";
 </script>
 
 <svelte:head>
