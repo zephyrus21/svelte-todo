@@ -1,13 +1,34 @@
-<script>
+<script context="module" lang="ts">
+  import type { Load } from "@sveltejs/kit";
+
+  export const load: Load = async ({ fetch }) => {
+    const res = await fetch("/todos.json");
+
+    if (res.ok) {
+      const todos = await res.json();
+      return {
+        props: {
+          todos,
+        },
+      };
+    }
+  };
+</script>
+
+<script lang="ts">
   import TodoItem from "../components/todo-item.svelte";
+
+  export let todos: Todo[];
+
+  const title = "Todo";
 </script>
 
 <svelte:head>
-  <title>Todo List</title>
+  <title>{title}</title>
 </svelte:head>
 
 <div class="todos">
-  <!-- <h1>{title}</h1> -->
+  <h1>{title}</h1>
 
   <form action="/todos.json" method="post" class="new">
     <input
@@ -18,18 +39,9 @@
     />
   </form>
 
-  <!-- {#each todos as todo}
-    <TodoItem
-      {todo}
-      processDeletedTodoResult={() => {
-        todos = todos.filter((t) => t.uid !== todo.uid);
-      }}
-      {processUpdatedTodoResult}
-    />
-  {/each} -->
-  <TodoItem />
-  <TodoItem />
-  <TodoItem />
+  {#each todos as todo}
+    <TodoItem {todo} />
+  {/each}
 </div>
 
 <style>
