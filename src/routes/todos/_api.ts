@@ -25,8 +25,9 @@ export const api = (req: Request, data?: Record<string, unknown>) => {
 
     case "patch":
       todos = todos.map((t) => {
-        if (t.uid === req.params.uid) t.text = data.text as string;
-
+        if (t.uid === req.params.uid)
+          if (data.text) t.text = data.text as string;
+          else t.done = data.done as boolean;
         return t;
       });
       status = 200;

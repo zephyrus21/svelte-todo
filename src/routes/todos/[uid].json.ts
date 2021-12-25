@@ -5,4 +5,5 @@ export const del: RequestHandler = (req) => api(req);
 export const patch: RequestHandler<{}, FormData> = (req) =>
   api(req, {
     text: req.body.get("text"),
+    done: req.body.get("done") ? !!req.body.get("done") : undefined,
   });
