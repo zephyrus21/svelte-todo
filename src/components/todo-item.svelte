@@ -8,9 +8,12 @@
     <button class="toggle" />
   </form>
 
-  <form action="" method="post" class="text">
+  <form
+    action="/todos/{todo.uid}.json?_method=patch"
+    method="post"
+    class="text"
+  >
     <input type="text" name="text" value={todo.text} />
-    <button aria-label="Save todo" class="save" />
   </form>
 
   <form action="/todos/{todo.uid}.json?_method=delete" method="post">
