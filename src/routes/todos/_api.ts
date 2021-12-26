@@ -37,7 +37,10 @@ export const api = (req: Request, data?: Record<string, unknown>) => {
       break;
   }
 
-  if (req.method.toLowerCase() !== "get") {
+  if (
+    req.method.toLowerCase() !== "get" &&
+    req.headers.accept !== "application/json"
+  ) {
     return {
       status: 303,
       headers: {

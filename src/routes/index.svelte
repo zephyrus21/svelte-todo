@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
   import type { Load } from "@sveltejs/kit";
+  import { enhance } from "../actions/form";
 
   export const load: Load = async ({ fetch }) => {
     const res = await fetch("/todos.json");
@@ -30,7 +31,7 @@
 <div class="todos">
   <h1>{title}</h1>
 
-  <form action="/todos.json" method="post" class="new">
+  <form action="/todos.json" method="post" class="new" use:enhance>
     <input
       type="text"
       name="text"
