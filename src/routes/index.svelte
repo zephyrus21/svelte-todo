@@ -29,6 +29,14 @@
 
     form.reset();
   };
+
+  const updateHandler = async (res: Response) => {
+    const updatedTodo = await res.json();
+    todos = todos.map((t) => {
+      if (t.uid === updatedTodo.uid) return updatedTodo;
+      return t;
+    });
+  };
 </script>
 
 <svelte:head>
@@ -53,7 +61,13 @@
   </form>
 
   {#each todos as todo}
-    <TodoItem {todo} />
+    <TodoItem
+      {todo}
+      deleteHandler={() => {
+        todos = todos.filter((t) => t.uid !== todo.uid);
+      }}
+      {updateHandler}
+    />
   {/each}
 </div>
 

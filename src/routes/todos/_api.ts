@@ -31,6 +31,7 @@ export const api = (req: Request, data?: Record<string, unknown>) => {
         return t;
       });
       status = 200;
+      body = todos.find((t) => t.uid === req.params.uid);
       break;
 
     default:
