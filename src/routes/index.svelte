@@ -22,6 +22,13 @@
   export let todos: Todo[];
 
   const title = "Todo";
+
+  const newTodoHandler = async (res: Response, form: HTMLFormElement) => {
+    const todo = await res.json();
+    todos = [...todos, todo];
+
+    form.reset();
+  };
 </script>
 
 <svelte:head>
@@ -31,7 +38,12 @@
 <div class="todos">
   <h1>{title}</h1>
 
-  <form action="/todos.json" method="post" class="new" use:enhance>
+  <form
+    action="/todos.json"
+    method="post"
+    class="new"
+    use:enhance={{ result: newTodoHandler }}
+  >
     <input
       type="text"
       name="text"
